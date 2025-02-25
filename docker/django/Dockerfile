@@ -16,9 +16,9 @@ RUN chmod +x /entrypoint
 RUN chmod +x /start
 
 # Set work directory and copy project
-WORKDIR /backend
-COPY . /backend
-RUN pip install -r /backend/requirements.txt
+WORKDIR /fido
+COPY . /fido
+RUN pip install -r /fido/requirements.txt
 
 
 # Keep the container up for debugging

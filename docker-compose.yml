@@ -1,10 +1,10 @@
 services:
-  backend:
+  fido:
     build:
       context: .
       dockerfile: docker/django/Dockerfile
     volumes:
-      - .:/backend
+      - .:/fido
     ports:
       - 8000:8000
     env_file:
