@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Wait for the database to be ready
+postgres_ready() {
+python << END
+import sys
+
+import psycopg
+
+try:
+    psycopg.connect(
+        dbname="${POSTGRES_DB}",
+        user="${POSTGRES_USER}",
+        password="${POSTGRES_PASSWORD}",
+        host="${POSTGRES_HOST}",
+        port="${POSTGRES_PORT}",
+    )
+except psycopg.OperationalError:
+    sys.exit(-1)
+sys.exit(0)
+
+END
+}
+>&2 echo 'Waiting for DB to be available'
+until postgres_ready; do
+  >&2 echo '...'
+  sleep 1
+done
+>&2 echo 'DB available'
+
+exec "$@"

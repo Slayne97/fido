@@ -1,0 +1,18 @@
+#!/bin/sh
+
+python manage.py migrate
+
+# Check if the superuser already exists
+if python manage.py shell -c "from django.contrib.auth.models import User; \
+                               exit(0 if User.objects.filter(username='$DJANGO_SUPERUSER_USERNAME').exists() else 1)"; then
+  echo "Superuser $DJANGO_SUPERUSER_USERNAME already exists, skipping creation."
+else
+  # Create superuser
+  python manage.py createsuperuser \
+    --noinput \
+    --username "$DJANGO_SUPERUSER_USERNAME" \
+    --email "$DJANGO_SUPERUSER_EMAIL" || true
+fi
+
+
+python manage.py runserver 0.0.0.0:8000
