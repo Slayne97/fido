@@ -7,9 +7,8 @@ from rest_framework import serializers
 
 class CandidateSerializer(serializers.ModelSerializer):
     name = serializers.CharField(required=True)
-    email = serializers.EmailField(required=False, allow_null=True)
-    phone = serializers.CharField(required=False, allow_null=True)
-    resume = serializers.FileField(required=False, allow_null=True)
+    email = serializers.EmailField(required=False)
+    phone = serializers.CharField(required=False)
     created_at = serializers.DateTimeField(required=False)
     updated_at = serializers.DateTimeField(required=False)
 
