@@ -5,9 +5,8 @@ from django.db import models
 
 class Candidate(models.Model):
     name = models.CharField(max_length=255)
-    email = models.EmailField(null=True)
-    phone = models.CharField(max_length=20, null=True)
-    resume = models.FileField(upload_to="resumes/", null=True)
+    email = models.EmailField(blank=True, default='')
+    phone = models.CharField(max_length=20, blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 

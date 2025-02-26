@@ -1,3 +1,16 @@
-from django.shortcuts import render
+# Internal
+from apps.candidates.models import Candidate
+from apps.candidates.serializers import CandidateSerializer
 
-# Create your views here.
+# Django and DRF
+from rest_framework import generics
+
+
+class CandidateListCreateView(generics.ListCreateAPIView):
+    queryset = Candidate.objects.all()
+    serializer_class = CandidateSerializer
+
+
+class CandidateRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Candidate.objects.all()
+    serializer_class = CandidateSerializer
